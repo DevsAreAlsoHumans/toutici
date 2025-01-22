@@ -8,42 +8,9 @@ Le projet consiste à développer une application web permettant aux utilisateur
 
 - **Offrir une interface simple et conviviale** : Créer une plateforme facile à utiliser avec un design intuitif.
 - **Permettre une interaction fluide entre les annonceurs et les acheteurs** : Faciliter la publication d'annonces et la gestion des interactions.
-- **Intégrer des fonctionnalités avancées pour la recherche et la gestion des annonces** : Permettre une recherche rapide et filtrée des annonces.
+- **Intégrer des fonctionnalités avancées pour la recherche et la gestion des annonces** : Permettre une recherche rapide.
 - **Assurer la sécurité des utilisateurs** : Protéger les informations personnelles et garantir la sécurité des transactions via un hachage des mots de passe.
 - **Optimiser la performance** : Garantir une application réactive avec des temps de chargement rapides même avec un grand nombre d'annonces et d'utilisateurs.
-
-## Critères d’acceptation
-
-1. **Inscription et Connexion**
-   - L'utilisateur peut s'inscrire avec son adresse email, son mot de passe.
-   - L'utilisateur peut se connecter en utilisant ses identifiants.
-
-2. **Gestion du Profil Utilisateur**
-   - L'utilisateur peut modifier ses informations personnelles (nom, prénom, email, numéro de téléphone, localisation (ville, département, région, pays)).
-   - L'utilisateur peut télécharger et changer sa photo de profil.
-   - L'historique des annonces publiées doit être accessible dans le profil.
-
-3. **Création d'Annonces**
-   - L'utilisateur peut créer une annonce en remplissant un formulaire avec des champs obligatoires (titre, description, prix, photos, catégorie, localisation).
-   - L'annonce est visible après validation et est enregistrée dans la base de données.
-
-4. **Consultation des Annonces**
-   - Les annonces doivent être affichées sous forme de liste, avec des filtres par prix, date, catégorie et localisation.
-   - Un affichage détaillé doit être disponible pour chaque annonce avec une galerie d'images.
-
-5. **Recherche Avancée**
-   - L'utilisateur peut rechercher des annonces par mots-clés les résultats de manière précise.
-
-6. **Interaction Utilisateur**
-   - Un système de commentaires et d'avis est disponible pour chaque annonce.
-   - L'utilisateur peut sauvegarder ses annonces favorites pour y accéder facilement.
-
-7. **Sécurité**
-   - Les mots de passe sont correctement hachés avant d'être enregistrés dans la base de données.
-   - Des mesures de sécurité sont prises pour protéger les informations personnelles des utilisateurs.
-
-8. **Performance**
-   - Le temps de chargement des pages ne doit pas dépasser 2 secondes.
 
 ## User Stories
 
@@ -63,7 +30,38 @@ Le projet consiste à développer une application web permettant aux utilisateur
    - *En tant qu'utilisateur*, je veux effectuer une recherche avancée d'annonces par mots-clés, afin de trouver précisément ce que je recherche.
    - **Critères d'acceptation** :
      - Un champ de recherche est disponible pour saisir des mots-clés.
-     - Les résultats de la recherche doivent être filtrés en temps réel.
+
+## Critères d’acceptation
+
+1. **Inscription et Connexion**
+   - L'utilisateur peut s'inscrire avec son adresse email, son mot de passe.
+   - L'utilisateur peut se connecter en utilisant ses identifiants.
+
+2. **Gestion du Profil Utilisateur**
+   - L'utilisateur peut modifier ses informations personnelles (nom, prénom, email, numéro de téléphone, localisation).
+   - L'historique des annonces publiées doit être accessible dans le profil.
+
+3. **Création d'Annonces**
+   - L'utilisateur peut créer une annonce en remplissant un formulaire avec des champs obligatoires (titre, description, prix, photos, catégorie, localisation).
+   - L'annonce est visible après validation et est enregistrée dans la base de données.
+
+4. **Consultation des Annonces**
+   - Un affichage détaillé doit être disponible pour chaque annonce avec une galerie d'images.
+
+5. **Recherche Avancée**
+   - L'utilisateur peut rechercher des annonces par mots-clés les résultats de manière précise.
+
+6. **Interaction Utilisateur**
+   - Un système de commentaires et d'avis est disponible pour chaque annonce.
+   - L'utilisateur peut sauvegarder ses annonces favorites pour y accéder facilement.
+
+7. **Sécurité**
+   - Les mots de passe sont correctement hachés avant d'être enregistrés dans la base de données.
+   - Des mesures de sécurité sont prises pour protéger les informations personnelles des utilisateurs.
+
+8. **Performance**
+   - Le temps de chargement des pages ne doit pas dépasser 2 secondes.
+
 
 ## Livrables
 
