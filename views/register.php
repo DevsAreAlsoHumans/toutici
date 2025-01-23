@@ -13,14 +13,15 @@
                 type="text"
                 id="last_name"
                 name="last_name"
-                value="<?php echo isset($_SESSION['form_data']['last_name']) ? htmlspecialchars($_SESSION['form_data']['last_name']) : ''; ?>">
-            <small>
-                <?php if (isset($_SESSION["error-last_name"])): ?>
-                    <p class="pico-color-red-500">
-                        <?php echo $_SESSION["error-last_name"];
-                        unset($_SESSION["error-last_name"]) ?>
-                    </p>
-                <?php endif; ?>
+                value="<?php echo isset($_SESSION['form_data']['last_name']) ? htmlspecialchars($_SESSION['form_data']['last_name']) : ''; ?>"
+                aria-invalid="<?php echo isset($_SESSION['error-last_name']) ? 'true' : 'null'; ?>"
+                <small>
+            <?php if (isset($_SESSION["error-last_name"])): ?>
+                <p class="pico-color-red-500">
+                    <?php echo $_SESSION["error-last_name"];
+                    unset($_SESSION["error-last_name"]) ?>
+                </p>
+            <?php endif; ?>
             </small>
 
             <label for="first_name">Prénom</label>
@@ -28,7 +29,8 @@
                 type="text"
                 id="first_name"
                 name="first_name"
-                value="<?php echo isset($_SESSION['form_data']['first_name']) ? htmlspecialchars($_SESSION['form_data']['first_name']) : ''; ?>">
+                value="<?php echo isset($_SESSION['form_data']['first_name']) ? htmlspecialchars($_SESSION['form_data']['first_name']) : ''; ?>"
+                aria-invalid="<?php echo isset($_SESSION['error-first_name']) ? 'true' : 'null'; ?>">
             <small>
                 <?php if (isset($_SESSION["error-first_name"])): ?>
                     <p class="pico-color-red-500">
@@ -43,7 +45,8 @@
                 type="email"
                 id="email"
                 name="email"
-                value="<?php echo isset($_SESSION['form_data']['email']) ? htmlspecialchars($_SESSION['form_data']['email']) : ''; ?>">
+                value="<?php echo isset($_SESSION['form_data']['email']) ? htmlspecialchars($_SESSION['form_data']['email']) : ''; ?>"
+                aria-invalid="<?php echo isset($_SESSION['error-email']) ? 'true' : 'null'; ?>">
             <small>
                 <?php if (isset($_SESSION["error-email"])): ?>
                     <p class="pico-color-red-500">
@@ -58,7 +61,8 @@
                 type="tel"
                 id="phone"
                 name="phone"
-                value="<?php echo isset($_SESSION['form_data']['phone']) ? htmlspecialchars($_SESSION['form_data']['phone']) : ''; ?>">
+                value="<?php echo isset($_SESSION['form_data']['phone']) ? htmlspecialchars($_SESSION['form_data']['phone']) : ''; ?>"
+                aria-invalid="<?php echo isset($_SESSION['error-phone']) ? 'true' : 'null'; ?>">
             <small>
                 <?php if (isset($_SESSION["error-phone"])): ?>
                     <p class="pico-color-red-500">
@@ -76,7 +80,8 @@
 
 
             <label for="password">Mot de passe</label>
-            <input type="password" id="password" name="password">
+            <input type="password" id="password" name="password" aria-invalid="<?php echo isset($_SESSION['error-phone']) ? 'true' : 'null'; ?>">
+
             <small>
                 <?php if (isset($_SESSION["error-password"])): ?>
                     <p class="pico-color-red-500">

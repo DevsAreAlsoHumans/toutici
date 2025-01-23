@@ -84,10 +84,10 @@ class AuthController
         // Vérification des données
         // Tous les champs sont entrés
         if (empty($email)) {
-            $this->returnWithError("/register", "-email", "L'email est obligatoire.");
+            $this->returnWithError("/login", "-email", "L'email est obligatoire.");
         }
         if (empty($password)) {
-            $this->returnWithError("/register", "-password", "Le mot de passe est obligatoire.");
+            $this->returnWithError("/login", "-password", "Le mot de passe est obligatoire.");
         }
 
 
