@@ -2,7 +2,7 @@
     <nav>
         <li>
             <h2>
-                <a href="/">Tout ici</a>
+                <a href="/toutici/">Tout ici</a>
             </h2>
         </li>
         <li>
@@ -10,7 +10,7 @@
         </li>
         <ul>
             <li>
-                <a href='/login'>
+                <a href='/toutici/login'>
                     <button>
                         Se Connecter
                     </button>
@@ -18,7 +18,7 @@
             </li>
             <li></li>
             <li>
-                <a href='/register'>
+                <a href='/toutici/register'>
                     <button>
                         Créer un compte
                     </button>
