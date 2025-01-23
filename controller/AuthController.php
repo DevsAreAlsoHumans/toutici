@@ -88,10 +88,10 @@ class AuthController
         // Vérification des données
         // Tous les champs sont entrés
         if (empty($email)) {
-            $this->returnWithError("/toutici/login", "-email", "L'email est obligatoire.");
+            $this->returnWithError("/toutici/register", "-email", "L'email est obligatoire.");
         }
         if (empty($password)) {
-            $this->returnWithError("/toutici/login", "-password", "Le mot de passe est obligatoire.");
+            $this->returnWithError("/toutici/register", "-password", "Le mot de passe est obligatoire.");
         }
 
 
