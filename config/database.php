@@ -12,7 +12,7 @@ class Database
             try {
                 $dsn = 'mysql:host=localhost;dbname=toutici;charset=utf8';
                 $username = 'root';
-                $password = '';
+                $password = 'root';
 
                 self::$instance = new PDO($dsn, $username, $password);
                 self::$instance->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -24,4 +24,3 @@ class Database
         return self::$instance;
     }
 }
-?>

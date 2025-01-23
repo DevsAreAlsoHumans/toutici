@@ -3,6 +3,9 @@
 require_once 'config/database.php';
 require_once 'router.php';
 
+// Démarrer la session
+session_start();
+
 // Créez une instance du routeur
 $router = new Router();
 
@@ -20,4 +23,3 @@ $router->get('/user/{id}', 'UserController@show');
 
 // Lancer le routeur
 $router->dispatch($_SERVER['REQUEST_URI']);
-?>
