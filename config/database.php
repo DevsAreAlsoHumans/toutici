@@ -10,7 +10,7 @@ class Database
     {
         if (self::$instance === null) {
             try {
-                $dsn = 'mysql:host=localhost;dbname=toutici;charset=utf8';
+                $dsn = 'mysql:host=localhost;dbname=toutici';
                 $username = 'root';
                 $password = '';
 

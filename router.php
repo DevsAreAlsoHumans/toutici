@@ -25,7 +25,7 @@ class Router
         // Vérifie si la route existe pour la méthode et le chemin donnés
         foreach ($this->routes[$method] as $route => $action) {
             $routePattern = preg_replace('/\{[a-zA-Z0-9_]+\}/', '([a-zA-Z0-9_]+)', $route);
-            if (preg_match('#^' . $routePattern . '$#', $path, $matches)) {
+            if (preg_match('#^' . $routePattern . '$#', $path, $matches) || $routePattern) {
                 array_shift($matches); // Supprime le premier élément qui est l'URL complète
                 $action = $this->routes[$method][$route]; // Récupère l'action associée à la route
                 [$controller, $method] = explode('@', $action); // Sépare le contrôleur et la méthode
