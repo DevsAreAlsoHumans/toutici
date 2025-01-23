@@ -1,5 +1,7 @@
 <?php
 
+require_once __DIR__ . '/../models/User.php';
+
 class UserController
 {
     public function show($id)
@@ -15,12 +17,12 @@ class UserController
             http_response_code(404);
             require_once __DIR__ . '/../views/404.php';
         }
-       
     }
 
     private function getUserById($id)
     {
-        // Logique pour récupérer l'utilisateur avec l'ID donné depuis la base de données
+        $user = new User();
+        return $user->getUserById($id);
     }
 
     public function delete($id)
@@ -46,4 +48,3 @@ class UserController
         }
     }
 }
-?>
