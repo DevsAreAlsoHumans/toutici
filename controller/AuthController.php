@@ -60,6 +60,10 @@ class AuthController
 
         // Ajout de l'utilisateur
         try {
+            if($user->getUserByEmail($email)) {
+                $this->returnWithError("/toutici/register", "-email", "L'email est déjà utilisé.");
+            }
+
             $user->addUser($first_name, $last_name, $email, $phone, $password, $location);
             $_SESSION["message"] = "Utilisateur créé avec succès.";
             unset($_POST["password"]);
@@ -84,10 +88,10 @@ class AuthController
         // Vérification des données
         // Tous les champs sont entrés
         if (empty($email)) {
-            $this->returnWithError("/toutici/register", "-email", "L'email est obligatoire.");
+            $this->returnWithError("/toutici/login", "-email", "L'email est obligatoire.");
         }
         if (empty($password)) {
-            $this->returnWithError("/toutici/register", "-password", "Le mot de passe est obligatoire.");
+            $this->returnWithError("/toutici/login", "-password", "Le mot de passe est obligatoire.");
         }
 
 
@@ -98,7 +102,7 @@ class AuthController
 
         // Vérification de l'utilisateur
         if (!$user) {
-            $this->returnWithError("/login", "-email", "L'utilisateur n'existe pas.");
+            $this->returnWithError("/toutici/login", "-email", "L'utilisateur n'existe pas.");
         }
 
         if (password_verify($password, $user['password'])) {
@@ -137,7 +141,7 @@ class AuthController
 
             header("Location: /toutici/");
         } else {
-            $this->returnWithError("/login", "-password", "Le mot de passe n'est pas correct");
+            $this->returnWithError("/toutici/login", "-password", "Le mot de passe n'est pas correct");
         }
     }
 

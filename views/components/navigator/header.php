@@ -2,7 +2,7 @@
     <nav>
         <li>
             <h2>
-                <a href="/toutici/">Tout ici</a>
+                <a class="logo" href="/toutici/">Tout ici</a>
             </h2>
         </li>
         <li>

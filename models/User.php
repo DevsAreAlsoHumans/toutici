@@ -87,10 +87,43 @@ class User
     /**
      * Supprime un utilisateur par son ID.
      */
-    public function deleteUser($id) {}
+    public function deleteUser($id) {
+        $request = "DELETE FROM user WHERE id = ?";
+
+        $stmt = $this->db->prepare($request);
+
+        $stmt->bindParam(1, $id);
+
+        try {
+            $stmt->execute();
+        } catch (PDOException $e) {
+            throw new Error("User.deleteUser failed: " . $e->getMessage());
+        }
+
+        return null;
+    }
 
     /**
      * Met à jour les informations d'un utilisateur.
      */
-    public function updateUser($id, $first_name, $last_name, $email, $phone, $password, $location) {}
+    public function updateUser($id, $first_name, $last_name, $email, $phone, $password, $location) {
+        $request = "UPDATE user SET first_name = ?, last_name = ?, email = ?, phone = ?, password = ?, location = ? WHERE id = ?";
+
+        $stmt = $this->db->prepare($request);
+
+        $password_hash = password_hash($password, PASSWORD_DEFAULT);
+        $stmt->bindParam(1, $first_name);
+        $stmt->bindParam(2, $last_name);
+        $stmt->bindParam(3, $email);
+        $stmt->bindParam(4, $phone);
+        $stmt->bindParam(5, $password_hash);
+        $stmt->bindParam(6, $location);
+        $stmt->bindParam(7, $id);
+
+        try {
+            $stmt->execute();
+        } catch (PDOException $e) {
+            throw new Error("User.updateUser failed: " . $e->getMessage());
+        }
+    }
 }
