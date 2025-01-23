@@ -17,6 +17,8 @@ $router->post('/register', 'AuthController@register');
 $router->get('/login', 'AuthController@loginForm');
 $router->post('/login', 'AuthController@login');
 $router->get('/user/{id}', 'UserController@show');
+$router->get('/user/{id}/delete', 'UserController@delete');
+$router->get('/user/{id}/edit', 'UserController@editForm');
 
 // Lancer le routeur
 $router->dispatch($_SERVER['REQUEST_URI']);
