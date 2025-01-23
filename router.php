@@ -1,54 +1,38 @@
 <?php
 
+namespace Application;
+
 class Router
 {
-    private $routes = []; // Tableau pour stocker les routes
+    private static $routes = [];
 
-    // Méthode pour ajouter une route GET
-    public function get($path, $action)
+    public static function addRoute($method, $path, $callback)
     {
-        $this->routes['GET'][$path] = $action;
+        self::$routes[] = ['method' => $method, 'path' => $path, 'callback' => $callback];
     }
 
-    // Méthode pour ajouter une route POST
-    public function post($path, $action)
+    public static function dispatch($method, $path)
     {
-        $this->routes['POST'][$path] = $action;
-    }
+        foreach (self::$routes as $route) {
+            $routePattern = self::convertPathToRegex($route['path']);
 
-    // Méthode pour dispatcher la requête vers le bon contrôleur et méthode
-    public function dispatch($uri)
-    {
-        $method = $_SERVER['REQUEST_METHOD']; // Récupère la méthode HTTP (GET, POST, etc.)
-        $path = parse_url($uri, PHP_URL_PATH); // Récupère le chemin de l'URI
+            if ($route['method'] === $method && preg_match($routePattern, $path, $matches)) {
+                array_shift($matches);
 
-        // Vérifie si la route existe pour la méthode et le chemin donnés
-        foreach ($this->routes[$method] as $route => $action) {
-            $routePattern = preg_replace('/\{[a-zA-Z0-9_]+\}/', '([a-zA-Z0-9_]+)', $route);
-            if (preg_match('#^' . $routePattern . '$#', $path, $matches) || $routePattern) {
-                array_shift($matches); // Supprime le premier élément qui est l'URL complète
-                $action = $this->routes[$method][$route]; // Récupère l'action associée à la route
-                [$controller, $method] = explode('@', $action); // Sépare le contrôleur et la méthode
-
-                $controllerFile = __DIR__ . '/controller/' . $controller . '.php'; // Chemin vers le fichier du contrôleur
-                if (file_exists($controllerFile)) {
-                    require_once $controllerFile; // Inclut le fichier du contrôleur
-
-                    $controllerClass = new $controller(); // Instancie le contrôleur
-                    if (method_exists($controllerClass, $method)) {
-                        call_user_func_array([$controllerClass, $method], $matches); // Appelle la méthode du contrôleur avec les paramètres
-                    } else {
-                        echo "La méthode $method n'existe pas dans le contrôleur $controller."; // Erreur si la méthode n'existe pas
-                    }
-                } else {
-                    echo "Le contrôleur $controller n'existe pas."; // Erreur si le contrôleur n'existe pas
-                }
+                call_user_func_array($route['callback'], array_values($matches));
                 return;
             }
         }
 
-        http_response_code(404); // Renvoie une erreur 404 si la route n'existe pas
-        echo "Page non trouvée.";
+        echo "404 - Not Found";
+    }
+
+    private static function convertPathToRegex($path)
+    {
+        $path = preg_replace('/\{([a-zA-Z0-9_]+)\}/', '(?P<$1>[a-zA-Z0-9_-]+)', $path);
+
+        $path = "~^$path$~";
+
+        return $path;
     }
 }
-?>
