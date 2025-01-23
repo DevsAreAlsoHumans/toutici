@@ -5,6 +5,8 @@
     <main class="container">
         <?php include './views/components/session_message.php'; ?>
 
+        <h2>Création d'un article</h2>
+
         <form action="/register" method="POST">
             <label for="last_name">Nom</label>
             <input
