@@ -80,8 +80,6 @@ class User
         } catch (PDOException $e) {
             throw new Error("User.addUser failed: " . $e->getMessage());
         }
-
-        return null;
     }
 
     /**

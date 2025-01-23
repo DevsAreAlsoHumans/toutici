@@ -9,7 +9,22 @@ class AnnouncementController
 
     public function create()
     {
-       
+        if (!isset($_SESSION["user"])) {
+            header("Location: /");
+            $_SESSION["message"] = "Connectez-vous ou créez un compte pour écrire un article";
+        } else {
+            // Logique pour créer une nouvelle annonce
+            $title = $_POST["title"];
+            $description = $_POST["description"];
+            $image = $_POST["image"];
+            $userId = $_SESSION["user"]["id"];
+
+            $announcement = new Announcement();
+            $announcement->addAnnouncement($title, $description, $image, $userId);
+
+            header("Location: /");
+            $_SESSION["message"] = "Votre annonce a été créée avec succès";
+        }
     }
 
     public function show($id)
@@ -27,9 +42,5 @@ class AnnouncementController
         }
     }
 
-    private function getAnnouncementById($id)
-    {
-        
-    }
+    private function getAnnouncementById($id) {}
 }
-?>
