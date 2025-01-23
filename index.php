@@ -18,7 +18,9 @@ $router->get('/login', 'AuthController@loginForm');
 $router->post('/login', 'AuthController@login');
 $router->get('/user/{id}', 'UserController@show');
 $router->get('/user/{id}/delete', 'UserController@delete');
-$router->get('/user/{id}/edit', 'UserController@editForm');
+$router->get('/user/{id}/edit', 'UserController@editFormView');
+$router->post('/user/{id}/edit', 'UserController@editForm');
+$router->get('/privacy_legacy', 'PrivacyController@index');
 
 // Lancer le routeur
 $router->dispatch($_SERVER['REQUEST_URI']);
