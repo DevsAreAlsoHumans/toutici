@@ -5,7 +5,7 @@
     <main class="container main">
         <?php include './views/components/session_message.php'; ?>
 
-        <form action="/toutici/login" method="post">
+        <form action="/login" method="post">
 
             <label for="email">Email</label>
             <input
