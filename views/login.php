@@ -5,7 +5,7 @@
     <main class="container main">
         <?php include './views/components/session_message.php'; ?>
 
-        <form action="/login" method="post">
+        <form action="/toutici/login" method="post">
 
             <label for="email">Email</label>
             <input
@@ -36,7 +36,7 @@
             <button type="submit">Se Connecter</button>
         </form>
         <small class="center">
-            <a href="/register">Créer un compte</a>
+            <a href="/toutici/register">Créer un compte</a>
         </small>
     </main>
 

@@ -1,77 +1,56 @@
 <?php
 
+namespace Application;
+
 class Router
 {
-    private $routes = [];
-    private $basePath;
+    private static $routes = [];
+    private static $basePath = '/toutici'; // Set your base path here
 
-    /**
-     * Constructeur pour initialiser le basePath.
-     */
-    public function __construct($basePath = '')
+    public static function addRoute($method, $path, $callback)
     {
-        $this->basePath = rtrim($basePath, '/');
+        self::$routes[] = ['method' => $method, 'path' => $path, 'callback' => $callback];
+        // Debug: Log the registered routes
+        error_log("Route added: $method $path");
     }
 
-    /**
-     * Enregistre une route GET.
-     */
-    public function get($path, $callback)
+    public static function dispatch($method, $path)
     {
-        $this->routes['GET'][$this->basePath . $path] = $callback;
-    }
-
-    /**
-     * Enregistre une route POST.
-     */
-    public function post($path, $callback)
-    {
-        $this->routes['POST'][$this->basePath . $path] = $callback;
-    }
-
-    /**
-     * Gestion de la requête entrante.
-     */
-    public function dispatch($uri)
-    {
-        $method = $_SERVER['REQUEST_METHOD'];
-        $path = parse_url($uri, PHP_URL_PATH);
-
-        // Supprime le basePath et normalise le chemin
-        $path = str_replace($this->basePath, '', $path);
-        $path = rtrim($path, '/'); // Enlève le slash final s'il y en a
-
-        // Vérifie si la méthode est définie dans les routes
-        if (!isset($this->routes[$method])) {
-            http_response_code(405); // Méthode non autorisée
-            echo "Méthode non autorisée.";
-            return;
+        // Remove the base path from the requested URI
+        if (strpos($path, self::$basePath) === 0) {
+            $path = substr($path, strlen(self::$basePath));
         }
 
-        // Recherche des correspondances pour cette méthode
-        foreach ($this->routes[$method] as $route => $callback) {
-            // Création du pattern pour les routes dynamiques
-            $routePattern = '#^' . str_replace(['{', '}'], ['(?P<', '>[^/]+)'], $route) . '$#';
+        // Debug: Log the requested method and path
+        error_log("Dispatching: $method $path");
 
-            if (preg_match($routePattern, $path, $matches)) {
-                $params = array_filter($matches, 'is_string', ARRAY_FILTER_USE_KEY);
+        foreach (self::$routes as $route) {
+            $routePattern = self::convertPathToRegex($route['path']);
 
-                // Si le callback est un contrôleur, invoquez-le
-                if (is_array($callback)) {
-                    [$controller, $method] = $callback;
-                    $controllerInstance = new $controller();
-                    return call_user_func_array([$controllerInstance, $method], $params);
-                }
-                // Sinon, invoquez directement le callback
-                elseif (is_callable($callback)) {
-                    return call_user_func_array($callback, $params);
-                }
+            if ($route['method'] === $method && preg_match($routePattern, $path, $matches)) {
+                array_shift($matches);
+
+                call_user_func_array($route['callback'], array_values($matches));
+                return;
             }
         }
 
-        // Si aucune route ne correspond
-        http_response_code(404);
-        echo "Page non trouvée.";
+        echo "404 - Not Found";
+    }
+
+    private static function convertPathToRegex($path)
+    {
+        $path = preg_replace('/\{([a-zA-Z0-9_]+)\}/', '(?P<$1>[a-zA-Z0-9_-]+)', $path);
+
+        $path = "~^$path$~";
+
+        return $path;
+    }
+
+    public static function redirect($path)
+    {
+        $url = self::$basePath . $path;
+        header("Location: $url");
+        exit();
     }
 }
-?>

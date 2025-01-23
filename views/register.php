@@ -5,7 +5,7 @@
     <main class="container">
         <?php include './views/components/session_message.php'; ?>
 
-        <form action="/register" method="POST">
+        <form action="/toutici/register" method="POST">
             <label for="last_name">Nom</label>
             <input
                 type="text"

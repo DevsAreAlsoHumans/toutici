@@ -30,7 +30,7 @@ class UserController
         // Logique pour supprimer l'utilisateur avec l'ID donné
 
         // Rediriger vers la page d'accueil
-        header('Location: /');
+        header('Location: /toutici/');
     }
 
     public function editForm($id)

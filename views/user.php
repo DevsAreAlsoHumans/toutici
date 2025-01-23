@@ -7,7 +7,7 @@
 
     <main class="container main">
         <section>
-            <h2>Hello User !</h2>
+            <h2>Hello <?php if (isset($user)) echo $user['last_name'] . " " . $user['first_name']  ?></h2>
         </section>
     </main>
 

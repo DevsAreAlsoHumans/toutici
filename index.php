@@ -1,32 +1,46 @@
 <?php
-// Inclure les fichiers nécessaires
-require_once 'router.php'; 
-require_once './controller/HomeController.php'; 
-require_once './controller/AnnouncementController.php'; 
-require_once './controller/SearchController.php'; 
-require_once './controller/AuthController.php'; 
-require_once './controller/UserController.php'; 
-require_once './controller/PrivacyController.php';
+// Inclure le fichier de configuration et les classes nécessaires
 
-// Créer une instance du routeur avec le chemin de base
-$router = new Router('/toutici');
+use Application\Router;
+
+require_once 'config/database.php';
+require_once 'router.php';
+
+// import controllers
+require_once __DIR__ . '/controller/HomeController.php';
+require_once __DIR__ . '/controller/AnnouncementController.php';
+require_once __DIR__ . '/controller/SearchController.php';
+require_once __DIR__ . '/controller/AuthController.php';
+require_once __DIR__ . '/controller/UserController.php';
+require_once __DIR__ . '/controller/PrivacyController.php';
+
+// Démarrer la session
+session_start();
+
+$homeController = new HomeController();
+$announcementController = new AnnouncementController();
+$searchController = new SearchController();
+$authController = new AuthController();
+$userController = new UserController();
+$privacyController = new PrivacyController();
 
 // Définir les routes
-$router->get('/', [HomeController::class, 'index']); 
-$router->get('/announcement/{id}', [AnnouncementController::class, 'show']);
-$router->get('/announcement/create', [AnnouncementController::class, 'createForm']);
-$router->post('/announcement/create', [AnnouncementController::class, 'create']);
-$router->get('/search', [SearchController::class, 'index']);
-$router->get('/register', [AuthController::class, 'registerForm']);
-$router->post('/register', [AuthController::class, 'register']);
-$router->get('/login', [AuthController::class, 'loginForm']);
-$router->post('/login', [AuthController::class, 'login']);
-$router->get('/user/{id}', [UserController::class, 'show']);
-$router->get('/user/{id}/delete', [UserController::class, 'delete']);
-$router->get('/user/{id}/edit', [UserController::class, 'editFormView']);
-$router->post('/user/{id}/edit', [UserController::class, 'editForm']);
-$router->get('/privacy_legacy', [PrivacyController::class, 'index']);
+Router::addRoute("GET", "/", [$homeController, "index"]);
+Router::addRoute("GET", "/announcement/{id}", [$announcementController, "show"]);
+Router::addRoute("GET", "/announcement/create", [$announcementController, "createForm"]);
+Router::addRoute("POST", "/announcement/create", [$announcementController, "create"]);
+Router::addRoute("GET", "/search", [$searchController, "index"]);
+Router::addRoute("GET", "/register", [$authController, "registerForm"]);
+Router::addRoute("POST", "/register", [$authController, "register"]);
+Router::addRoute("GET", "/login", [$authController, "loginForm"]);
+Router::addRoute("POST", "/login", [$authController, "login"]);
+Router::addRoute("GET", "/user/{id}", [$userController, "show"]);
+Router::addRoute("GET", "/user/{id}/delete", [$userController, "delete"]);
+Router::addRoute("GET", "/user/{id}/edit", [$userController, "editFormView"]);
+Router::addRoute("POST", "/user/{id}/edit", [$userController, "editForm"]);
+Router::addRoute("GET", "/privacy_legacy", [$privacyController, "index"]);
 
-// Lancer le routeur
-$router->dispatch($_SERVER['REQUEST_URI']);
-?>
+$method = $_SERVER["REQUEST_METHOD"];
+$path = $_SERVER["REQUEST_URI"];
+
+Router::dispatch($method, $path);
