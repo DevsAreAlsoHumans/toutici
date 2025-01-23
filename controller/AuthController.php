@@ -1,5 +1,7 @@
 <?php
 
+use Firebase\JWT\JWT;
+
 require_once __DIR__ . '/../models/User.php';
 
 class AuthController
@@ -100,6 +102,39 @@ class AuthController
         }
 
         if (password_verify($password, $user['password'])) {
+            // TODO: Mise en place du Token JWT
+            // Créer le payload pour le JWT
+            // $payload = [
+            //     'iss' => "http://localhost:3000/", // Émetteur
+            //     'aud' => "http://localhost:3000/", // Audience
+            //     'iat' => time(),                // Date de création
+            //     'exp' => time() + 3600,         // Expiration (1 heure)
+            //     'user_id' => $user['id'],       // ID utilisateur
+            //     'user_email' => $user['email'],       // Email utilisateur
+            //     'user_last_name' => $user['last_name'],   // Nom de famille utilisateur
+            //     'user_first_name' => $user['first_name'],  // Prénom utilisateur
+            //     'user_location' => $user['location'] ? $user['location'] : null,  // Localisation de l'utilisateur
+            // ];
+
+            // Générer le JWT
+            // TODO: Utiliser une clé secrète plus sécurisée
+            // $jwt = JWT::encode($payload, 'test', 'HS256');
+
+            // Stocker le JWT dans un cookie (ou une autre méthode)
+            // setcookie("auth_token", $jwt, time() + 3600, "/", "", false, true);
+
+            // Redirection après la connexion
+            // header("Location: /");
+            // exit();
+
+            $_SESSION['user'] = [
+                'id' => $user['id'],
+                'email' => $user['email'],
+                'last_name' => $user['last_name'],
+                'first_name' => $user['first_name'],
+                'location' => $user['location']
+            ];
+
             header("Location: /");
         } else {
             $this->returnWithError("/login", "-password", "Le mot de passe n'est pas correct");
