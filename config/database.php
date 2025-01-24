@@ -1,5 +1,12 @@
 <?php
 
+require_once __DIR__ . '/../vendor/autoload.php';
+
+use Dotenv\Dotenv;
+
+$dotenv = Dotenv::createImmutable(__DIR__ . '/../');
+$dotenv->load();
+
 class Database
 {
     private static $instance = null;
@@ -10,7 +17,7 @@ class Database
     {
         if (self::$instance === null) {
             try {
-                $dsn = 'mysql:host='.$_ENV["localhost"].';dbname='.$_ENV["DB_NAME"];
+                $dsn = 'mysql:host='.$_ENV["DB_HOST"].';dbname='.$_ENV["DB_NAME"];
                 $username = $_ENV['DB_USER'];
                 $password = $_ENV['DB_PASSWORD'];
 
