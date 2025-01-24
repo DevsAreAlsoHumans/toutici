@@ -15,50 +15,64 @@ class Announcement
     /**
      * Récupère toutes les annonces.
      */
-    public function getAllAnnouncements() {}
+    public function getAllAnnouncements()
+    {
+        $query = 'SELECT * FROM announcement';
+
+        $stmt = $this->db->prepare($query);
+
+        try {
+            $stmt->execute();
+        } catch (PDOException $e) {
+            throw new Error("Announcement.getAllAnnouncements failed: " . $e->getMessage());
+        }
+
+        return $stmt->fetchAll();
+    }
 
     /**
      * Récupère une annonce par son ID.
      */
-    public function getAnnouncementById($id) {
+    public function getAnnouncementById($id)
+    {
         $query = 'SELECT * FROM announcement WHERE id = :id';
-    
+
         $stmt = $this->db->prepare($query);
-    
+
         $stmt->bindParam(':id', $id);
-    
+
         try {
             $stmt->execute();
         } catch (PDOException $e) {
             throw new Error("Announcement.getAnnouncementById failed: " . $e->getMessage());
         }
-    
+
         return $stmt->fetch();
     }
 
     /**
      * Ajoute une nouvelle annonce.
      */
-       public function addAnnouncement($title, $description, $image, $price, $userId, $categoryId)
+    public function addAnnouncement($title, $description, $image, $price, $userId, $categoryId)
     {
         $query = 'INSERT INTO announcement (title, description, image, price, user_id, category_id) VALUES (:title, :description, :image, :price, :userId, :categoryId)';
-    
+
         $stmt = $this->db->prepare($query);
-    
+
         $stmt->bindParam(':title', $title);
         $stmt->bindParam(':description', $description);
         $stmt->bindParam(':image', $image);
         $stmt->bindParam(':price', $price);
         $stmt->bindParam(':userId', $userId);
         $stmt->bindParam(':categoryId', $categoryId); // Corrected parameter name
-    
+
         try {
             $stmt->execute();
         } catch (PDOException $e) {
             throw new Error("Announcement.addAnnouncement failed: " . $e->getMessage());
         }
     }
-   
+
 
     /**
      * Met à jour une annonce existante.
@@ -73,19 +87,20 @@ class Announcement
     /**
      * Récupère les annonces d'un utilisateur spécifique.
      */
-    public function getAnnouncementsByUserId($userId) {
+    public function getAnnouncementsByUserId($userId)
+    {
         $query = 'SELECT * FROM announcement WHERE user_id = :userId';
-    
+
         $stmt = $this->db->prepare($query);
-    
+
         $stmt->bindParam(':userId', $userId);
-    
+
         try {
             $stmt->execute();
         } catch (PDOException $e) {
             throw new Error("Announcement.getAnnouncementsByUserId failed: " . $e->getMessage());
         }
-    
+
         return $stmt->fetchAll();
     }
 }

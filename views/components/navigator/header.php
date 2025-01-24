@@ -8,7 +8,6 @@
         <li>
             <input type="search" id="search" name="search" placeholder="Chercher une annonce" />
         </li>
-        <li>
             <?php
             if (isset($user)) {
                 echo "
@@ -35,8 +34,6 @@
                         </a>
                     </li>
                 </ul>
-                
-
                 ";
             } else {
                 echo "<ul>
@@ -59,6 +56,5 @@
                 ";
             }
             ?>
-        </li>
     </nav>
 </header>

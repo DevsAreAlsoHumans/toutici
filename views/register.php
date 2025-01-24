@@ -80,8 +80,7 @@
 
 
             <label for="password">Mot de passe</label>
-            <input type="password" id="password" name="password" aria-invalid="<?php echo isset($_SESSION['error-phone']) ? 'true' : 'null'; ?>">
-
+            <input type="password" id="password" name="password" aria-invalid="<?php echo isset($_SESSION['error-password']) ? 'true' : 'null'; ?>">
             <small>
                 <?php if (isset($_SESSION["error-password"])): ?>
                     <p class="pico-color-red-500">
