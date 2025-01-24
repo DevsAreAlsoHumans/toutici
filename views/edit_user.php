@@ -3,9 +3,10 @@
 <body>
     <?php include './views/components/navigator/header.php'; ?>
 
-    <?php include './views/components/session_message.php'; ?>
-
     <main class="container main">
+
+        <?php include './views/components/session_message.php'; ?>
+
         <form action=<?php echo "/toutici/user/" . $user['id'] . "/edit"; ?> method="post">
             <label for="first_name">First Name</label>
             <input

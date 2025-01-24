@@ -3,9 +3,10 @@
 <body>
     <?php include './views/components/navigator/header.php'; ?>
 
-    <?php include './views/components/session_message.php'; ?>
 
     <main class="container main">
+        <?php include './views/components/session_message.php'; ?>
+
         <section>
             <h2>Hello <?php if (isset($user)) echo $user['last_name'] . " " . $user['first_name']  ?></h2>
             <?php
