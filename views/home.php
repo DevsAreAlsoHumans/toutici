@@ -5,10 +5,27 @@
 
     <main class="container main">
 
-        <?php include './views/components/session_message.php'; ?>
+        <form class="mobile-search" action="/search" method="get">
+            <fieldset role="group" style="margin: 0">
+                <input type=" text" id="search" name="search" placeholder="Chercher une annonce" />
+                <input type="submit" value="Rechercher" />
+            </fieldset>
+        </form>
 
+        <br>
+        <br>
+
+        <?php include './views/components/session_message.php'; ?>
         <section>
-            <h2>Hello World !</h2>
+            <div class="small-inline">
+                <h2>Hello World !</h2>
+                <a href='/announcement/create'>
+                    <button>
+                        Nouvelle annonce
+                    </button>
+                </a>
+            </div>
+            <br>
             <?php if ($announcements): ?>
                 <div class="home-grid">
                     <?php foreach ($announcements as $announcement): ?>
@@ -21,13 +38,14 @@
                                 <a href="/announcement/<?php echo $announcement['id']; ?>">Lien</a>
                             </div>
                             <?php if ($announcement['image']): ?>
-                                <img src="<?php echo "../public/img/" . htmlspecialchars($announcement['image']); ?>" alt="<?php echo htmlspecialchars($announcement['title']); ?>" class="small-img">
+                                <img src="<?php echo "../public/img/" . htmlspecialchars($announcement['image']); ?>"
+                                    alt="<?php echo htmlspecialchars($announcement['title']); ?>" class="small-img">
                             <?php endif; ?>
                         </article>
                     <?php endforeach; ?>
                 </div>
             <?php else: ?>
-                <p>No announcements found.</p>
+                <p>Aucune annonce trouvé.</p>
             <?php endif; ?>
 
         </section>
