@@ -13,6 +13,7 @@ require_once __DIR__ . '/controller/SearchController.php';
 require_once __DIR__ . '/controller/AuthController.php';
 require_once __DIR__ . '/controller/UserController.php';
 require_once __DIR__ . '/controller/PrivacyController.php';
+require_once __DIR__ . '/controller/Error404Controller.php';
 
 // Démarrer la session
 session_start();
@@ -23,6 +24,7 @@ $searchController = new SearchController();
 $authController = new AuthController();
 $userController = new UserController();
 $privacyController = new PrivacyController();
+$Error404Controller = new Error404Controller();
 
 // Définir les routes
 Router::addRoute("GET", "/", [$homeController, "index"]);
@@ -40,6 +42,7 @@ Router::addRoute("GET", "/user/{id}/delete", [$userController, "delete"]);
 Router::addRoute("GET", "/user/{id}/edit", [$userController, "editFormView"]);
 Router::addRoute("POST", "/user/{id}/edit", [$userController, "editForm"]);
 Router::addRoute("GET", "/privacy_legacy", [$privacyController, "index"]);
+Router::addRoute("GET", "/404", [$Error404Controller, "index"]);
 
 $method = $_SERVER["REQUEST_METHOD"];
 $path = $_SERVER["REQUEST_URI"];

@@ -21,6 +21,13 @@ class Router
             $path = substr($path, strlen(self::$basePath));
         }
 
+        // Parse query parameters
+        $queryParams = [];
+        if (strpos($path, '?') !== false) {
+            list($path, $queryString) = explode('?', $path, 2);
+            parse_str($queryString, $queryParams);
+        }
+
         // Debug: Log the requested method and path
         error_log("Dispatching: $method $path");
 
@@ -30,12 +37,15 @@ class Router
             if ($route['method'] === $method && preg_match($routePattern, $path, $matches)) {
                 array_shift($matches);
 
-                call_user_func_array($route['callback'], array_values($matches));
+                // Merge route parameters and query parameters
+                $params = array_merge(array_values($matches), [$queryParams]);
+
+                call_user_func_array($route['callback'], $params);
                 return;
             }
         }
 
-        echo "404 - Not Found";
+        header('Location: ' . self::$basePath . '/404');
     }
 
     private static function convertPathToRegex($path)

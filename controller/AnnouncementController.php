@@ -16,7 +16,7 @@ class AnnouncementController
     public function create()
     {
         if (!isset($_SESSION["user"])) {
-            $_SESSION["message"] = "Connectez-vous ou créez un compte pour écrire un article";
+            $_SESSION["message"] = "Connectez-vous ou créez un compte pour écrire une annonce";
             header("Location: /");
             exit();
         } else {
