@@ -1,19 +1,30 @@
 <header class="container">
-    <nav>
-        <li>
-            <h2>
-                <a class="logo" href="/toutici/">Tout ici</a>
-            </h2>
-        </li>
-        <li>
-            <input type="search" id="search" name="search" placeholder="Chercher une annonce" />
-        </li>
+    <nav class="nav">
+        <ul>
+            <li>
+                <h2>
+                    <a class="logo" href="/">Tout ici</a>
+                </h2>
+            </li>
+
+        </ul>
+        <ul>
+            <li>
+                <form action="/search" method="get">
+                    <fieldset role="group" style="margin: 0">
+                        <input type=" text" id="search" name="search" placeholder="Chercher une annonce" />
+                        <input type="submit" value="Rechercher" />
+                    </fieldset>
+                </form>
+            </li>
+        </ul>
+        <ul>
             <?php
             if (isset($user)) {
                 echo "
                 <ul>
                     <li>
-                        <a href='/toutici/announcement/create'>
+                        <a href='/announcement/create'>
                             <button>
                                 Créer une annonce
                             </button>
@@ -21,13 +32,13 @@
                     </li>
                     <li></li>
                     <li>
-                        <a href='/toutici/user/" . $user['id'] . "'>
+                        <a href='/user/" . $user['id'] . "'>
                             <button>Bienvenue <strong>" . $user['first_name'] . "</strong></button>
                         </a>
                     </li>
                     <li></li>
                     <li>    
-                        <a href='/toutici/logout'>
+                        <a href='/logout'>
                             <button>
                                 Se Déconnecter
                             </button>
@@ -38,7 +49,7 @@
             } else {
                 echo "<ul>
                         <li>
-                            <a href='/toutici/login'>
+                            <a href='/login'>
                                 <button>
                                     Se Connecter
                                 </button>
@@ -46,7 +57,7 @@
                         </li>
                         <li></li>
                         <li>
-                            <a href='/toutici/register'>
+                            <a href='/register'>
                                 <button>
                                     Créer un compte
                                 </button>
@@ -56,5 +67,6 @@
                 ";
             }
             ?>
+        </ul>
     </nav>
 </header>
