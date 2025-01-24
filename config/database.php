@@ -10,9 +10,9 @@ class Database
     {
         if (self::$instance === null) {
             try {
-                $dsn = 'mysql:host=localhost;dbname=toutici';
-                $username = 'root';
-                $password = 'root';
+                $dsn = 'mysql:host='.$_ENV["localhost"].';dbname='.$_ENV["DB_NAME"];
+                $username = $_ENV['DB_USER'];
+                $password = $_ENV['DB_PASSWORD'];
 
                 self::$instance = new PDO($dsn, $username, $password);
                 self::$instance->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
