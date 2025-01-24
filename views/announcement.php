@@ -1,4 +1,5 @@
 <?php include './views/components/head.php'; ?>
+
 <?php include './views/components/navigator/header.php'; ?>
 
 <main class="container main center">

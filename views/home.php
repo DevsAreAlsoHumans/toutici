@@ -19,7 +19,7 @@
         <section>
             <div class="small-inline">
                 <h2>Hello World !</h2>
-                <a href='/announcement/create'>
+                <a href='/toutici/announcement/create'>
                     <button>
                         Nouvelle annonce
                     </button>
@@ -35,7 +35,7 @@
 
                                 <p>Price : <?php echo htmlspecialchars($announcement['price']); ?> €</p>
 
-                                <a href="/announcement/<?php echo $announcement['id']; ?>">Lien</a>
+                                <a href="/toutici/announcement/<?php echo $announcement['id']; ?>">Lien</a>
                             </div>
                             <?php if ($announcement['image']): ?>
                                 <img src="<?php echo "../public/img/" . htmlspecialchars($announcement['image']); ?>"

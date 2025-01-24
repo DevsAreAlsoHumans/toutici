@@ -24,9 +24,12 @@
         <ul>
             <li></li>
         </ul>
+        
+        
         <ul>
             <?php
-            if (isset($user)) {
+            
+            if (isset($_SESSION["user"])) {
                 echo "
                 <ul>
                     <li>
