@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : mer. 22 jan. 2025 à 10:05
+-- Généré le : ven. 24 jan. 2025 à 00:13
 -- Version du serveur : 9.1.0
 -- Version de PHP : 8.3.14
 
@@ -33,10 +33,46 @@ CREATE TABLE IF NOT EXISTS `announcement` (
   `title` varchar(255) NOT NULL,
   `description` text,
   `image` varchar(255) DEFAULT NULL,
+  `price` int NOT NULL,
   `user_id` int NOT NULL,
+  `category_id` int NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `user_id` (`user_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  KEY `user_id` (`user_id`),
+  KEY `fk_category` (`category_id`)
+) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `category`
+--
+
+DROP TABLE IF EXISTS `category`;
+CREATE TABLE IF NOT EXISTS `category` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Déchargement des données de la table `category`
+--
+
+INSERT INTO `category` (`id`, `name`) VALUES
+(5, 'Électronique'),
+(4, 'Services'),
+(3, 'Emploi'),
+(2, 'Véhicules'),
+(1, 'Immobilier'),
+(6, 'Mode et Accessoires'),
+(7, 'Maison et Jardin'),
+(8, 'Loisirs'),
+(9, 'Animaux'),
+(10, 'Événements'),
+(11, 'Cours et Formations'),
+(12, 'Bricolage et Matériaux'),
+(13, 'Enfants et Bébé'),
+(14, 'Multimédia');
 
 -- --------------------------------------------------------
 
@@ -55,29 +91,9 @@ CREATE TABLE IF NOT EXISTS `user` (
   `location` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `email` (`email`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 COMMIT;
 
-
-
-DROP TABLE IF EXISTS `category`;
-CREATE TABLE IF NOT EXISTS `category` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
--- --------------------------------------------------------
-
--- Modification de la table `announcement` pour ajouter la clé étrangère `category_id`
---
-
-ALTER TABLE `announcement`
-ADD COLUMN `category_id` int NOT NULL,
-ADD CONSTRAINT `fk_category`
-  FOREIGN KEY (`category_id`) REFERENCES `category`(`id`);
-
--- ...existing code...
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

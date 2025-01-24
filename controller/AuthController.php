@@ -60,7 +60,7 @@ class AuthController
 
         // Ajout de l'utilisateur
         try {
-            if($user->getUserByEmail($email)) {
+            if ($user->getUserByEmail($email)) {
                 $this->returnWithError("/toutici/register", "-email", "L'email est déjà utilisé.");
             }
 
@@ -143,6 +143,12 @@ class AuthController
         } else {
             $this->returnWithError("/toutici/login", "-password", "Le mot de passe n'est pas correct");
         }
+    }
+
+    public function logout()
+    {
+        session_destroy();
+        header("Location: /toutici/");
     }
 
     private function returnWithError($location, $errorName, $errorMessage)

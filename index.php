@@ -26,14 +26,15 @@ $privacyController = new PrivacyController();
 
 // Définir les routes
 Router::addRoute("GET", "/", [$homeController, "index"]);
-Router::addRoute("GET", "/announcement/{id}", [$announcementController, "show"]);
 Router::addRoute("GET", "/announcement/create", [$announcementController, "createForm"]);
 Router::addRoute("POST", "/announcement/create", [$announcementController, "create"]);
+Router::addRoute("GET", "/announcement/{id}", [$announcementController, "show"]);
 Router::addRoute("GET", "/search", [$searchController, "index"]);
 Router::addRoute("GET", "/register", [$authController, "registerForm"]);
 Router::addRoute("POST", "/register", [$authController, "register"]);
 Router::addRoute("GET", "/login", [$authController, "loginForm"]);
 Router::addRoute("POST", "/login", [$authController, "login"]);
+Router::addRoute("GET", "/logout", [$authController, "logout"]);
 Router::addRoute("GET", "/user/{id}", [$userController, "show"]);
 Router::addRoute("GET", "/user/{id}/delete", [$userController, "delete"]);
 Router::addRoute("GET", "/user/{id}/edit", [$userController, "editFormView"]);

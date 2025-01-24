@@ -119,7 +119,8 @@ class User
         $stmt->bindParam(7, $id);
 
         try {
-            $stmt->execute();
+            $user = $stmt->execute();
+            $_SESSION["user_message"] = $user;
         } catch (PDOException $e) {
             throw new Error("User.updateUser failed: " . $e->getMessage());
         }

@@ -11,9 +11,33 @@
         <li>
             <?php
             if (isset($user)) {
-                echo "<a href='/toutici/user/" . $user['id'] . "'>";
-                echo "<button>Bienvenue <strong>" . $user['first_name'] . "</strong></button>";
-                echo "</a>";
+                echo "
+                <ul>
+                    <li>
+                        <a href='/toutici/announcement/create'>
+                            <button>
+                                Créer une annonce
+                            </button>
+                        </a>
+                    </li>
+                    <li></li>
+                    <li>
+                        <a href='/toutici/user/" . $user['id'] . "'>
+                            <button>Bienvenue <strong>" . $user['first_name'] . "</strong></button>
+                        </a>
+                    </li>
+                    <li></li>
+                    <li>    
+                        <a href='/toutici/logout'>
+                            <button>
+                                Se Déconnecter
+                            </button>
+                        </a>
+                    </li>
+                </ul>
+                
+
+                ";
             } else {
                 echo "<ul>
                         <li>

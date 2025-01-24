@@ -7,7 +7,7 @@
 
         <h2>Création d'une nouvelle annonce</h2>
 
-        <form action="/login" method="post">
+        <form action="/toutici/announcement/create" method="post" enctype="multipart/form-data">
 
             <label for="title">Title</label>
             <input
@@ -26,7 +26,9 @@
             </small>
 
             <label for="description">Description</label>
-            <textarea type="text" name="description" id="description" aria-invalid="<?php echo isset($_SESSION['error-description']) ? 'true' : 'null'; ?>">
+            <textarea name="description" id="description" aria-invalid="<?php echo isset($_SESSION['error-description']) ? 'true' : 'null'; ?>">
+                <?php echo isset($_SESSION['form_data']['description']) ? htmlspecialchars($_SESSION['form_data']['description']) : ''; ?>
+            </textarea>
             <small>
                 <?php if (isset($_SESSION["error-description"])): ?>
                     <p class="pico-color-red-500">
@@ -36,11 +38,50 @@
                 <?php endif; ?>
             </small>
 
-            <button type="submit">Se Connecter</button>
+            <label for="category">Category</label>
+            <select id="category" name="category">
+                <option value="" disabled selected>--Please choose an option--</option>
+                <?php foreach ($categories as $category): ?>
+                    <option value="<?php echo htmlspecialchars($category['id']); ?>">
+                        <?php echo htmlspecialchars($category['name']); ?>
+                    </option>
+                <?php endforeach; ?>
+            </select>
+
+            <label for="price">Price</label>
+            <input
+                type="number"
+                id="price"
+                name="price"
+                min="0"
+                value="<?php echo isset($_SESSION['form_data']['price']) ? htmlspecialchars($_SESSION['form_data']['price']) : ''; ?>"
+                aria-invalid="<?php echo isset($_SESSION['error-price']) ? 'true' : 'null'; ?>">
+            <small>
+                <?php if (isset($_SESSION["error-price"])): ?>
+                    <p class="pico-color-red-500">
+                        <?php echo $_SESSION["error-price"];
+                        unset($_SESSION["error-price"]) ?>
+                    </p>
+                <?php endif; ?>
+            </small>
+
+            <label for="image">Image</label>
+            <input
+                type="file"
+                id="image"
+                name="image"
+                aria-invalid="<?php echo isset($_SESSION['error-image']) ? 'true' : 'null'; ?>">
+            <small>
+                <?php if (isset($_SESSION["error-image"])): ?>
+                    <p class="pico-color-red-500">
+                        <?php echo $_SESSION["error-image"];
+                        unset($_SESSION["error-image"]) ?>
+                    </p>
+                <?php endif; ?>
+            </small>
+
+            <button type="submit">Créer</button>
         </form>
-        <small class="center">
-            <a href="/register">Créer un compte</a>
-        </small>
     </main>
 
     <?php include './views/components/navigator/footer.php'; ?>

@@ -8,7 +8,6 @@
         <h2>Connection à votre compte</h2>
 
         <form action="/toutici/login" method="post">
-            <h2>Création d'un article</h2>
 
             <label for="email">Email</label>
             <input
