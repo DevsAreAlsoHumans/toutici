@@ -14,7 +14,42 @@ body {
   min-height: 100vh;
 }
 
-
-.logo{
+.logo {
   text-decoration: none;
+}
+
+.inline {
+  width: 70%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.img {
+  height: 300px;
+}
+
+.small-inline {
+  display: flex;
+  justify-content: space-between;
+  width: fit-content;
+  gap: 10px;
+}
+
+.small-img {
+  height: 100px;
+}
+
+.description {
+  width: auto;
+}
+
+.home-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+}
+
+@media screen and (max-width: 1024px) {
+  .inline {
+    flex-direction: column;
+  }
 }
