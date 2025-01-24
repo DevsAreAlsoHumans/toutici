@@ -108,3 +108,7 @@ Le projet consiste à développer une application web permettant aux utilisateur
 ## Use Case Diagram
 
 ![Diagramme de Cas d'Utilisation](./public/img/use_case.png)
+
+## Architecture Global
+
+![Architecture Global](./public/img/global_architecture.png)
