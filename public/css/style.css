@@ -22,6 +22,7 @@ body {
   width: 70%;
   display: flex;
   justify-content: space-between;
+  align-items: center;
 }
 
 .img {
@@ -31,8 +32,7 @@ body {
 .small-inline {
   display: flex;
   justify-content: space-between;
-  width: fit-content;
-  gap: 10px;
+  width: 100%;
 }
 
 .small-img {
@@ -46,6 +46,21 @@ body {
 .home-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 50px;
+}
+
+.mobile-search {
+  display: none;
+}
+
+@media screen and (max-width: 768px) {
+  .search {
+    display: none;
+  }
+
+  .mobile-search {
+    display: block;
+  }
 }
 
 @media screen and (max-width: 1024px) {

@@ -13,8 +13,6 @@ class SearchController
 
         $search = $_GET["search"];
 
-        var_dump($search);
-
         $announcementController = new Announcement();
         $announcements = $announcementController->getAllAnnouncements();
 
