@@ -1,16 +1,19 @@
 <header class="container">
-    <nav class="nav">
+    <nav>
         <ul>
             <li>
                 <h2>
-                    <a class="logo" href="/">Tout ici</a>
+                    <a style='width: max-content;' class="logo" href="/toutici/">Tout ici</a>
                 </h2>
             </li>
 
         </ul>
         <ul>
+            <li></li>
+        </ul>
+        <ul class="search">
             <li>
-                <form action="/search" method="get">
+                <form action="/toutici/search" method="get">
                     <fieldset role="group" style="margin: 0">
                         <input type=" text" id="search" name="search" placeholder="Chercher une annonce" />
                         <input type="submit" value="Rechercher" />
@@ -19,28 +22,23 @@
             </li>
         </ul>
         <ul>
+            <li></li>
+        </ul>
+        <ul>
             <?php
             if (isset($user)) {
                 echo "
                 <ul>
                     <li>
-                        <a href='/announcement/create'>
-                            <button>
-                                Créer une annonce
-                            </button>
-                        </a>
-                    </li>
-                    <li></li>
-                    <li>
-                        <a href='/user/" . $user['id'] . "'>
-                            <button>Bienvenue <strong>" . $user['first_name'] . "</strong></button>
+                        <a href='/toutici/user/" . $user['id'] . "'>
+                            <button style='width: max-content;'>Bienvenue <i>" . $user['first_name'] . "</i></button>
                         </a>
                     </li>
                     <li></li>
                     <li>    
-                        <a href='/logout'>
+                        <a href='/toutici/logout'>
                             <button>
-                                Se Déconnecter
+                                Déconnexion
                             </button>
                         </a>
                     </li>
@@ -49,7 +47,7 @@
             } else {
                 echo "<ul>
                         <li>
-                            <a href='/login'>
+                            <a href='/toutici/login'>
                                 <button>
                                     Se Connecter
                                 </button>
@@ -57,7 +55,7 @@
                         </li>
                         <li></li>
                         <li>
-                            <a href='/register'>
+                            <a href='/toutici/register'>
                                 <button>
                                     Créer un compte
                                 </button>

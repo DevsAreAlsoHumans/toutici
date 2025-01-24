@@ -49,10 +49,11 @@ class AuthController
             $this->returnWithError("/toutici/register", "-phone", "Le numéro de téléphone n'est pas valide.");
         }
 
-        $pattern = '/^(?=.[a-z])(?=.[A-Z])(?=.\d)(?=.[!@#$%^&(),.?":{}|<>])[A-Za-z\d!@#$%^&(),.?":{}|<>]{12,}$/';
-        // Le mot de passe est valide
-        if (preg_match($pattern, $password)) {
-            $this->returnWithError("/toutici/register", "-password", "Le mot de passe doit contenir au moins 12 caractères, dont une lettre majuscule, une lette minuscule, un chiffre et un caractère spécial." . $password);
+        $pattern = '/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_])[A-Za-z\d\W_]{12,}$/';
+
+        // Le mot de passe n'est pas valide
+        if (!preg_match($pattern, $password)) {
+            $this->returnWithError("/toutici/register", "-password", "Le mot de passe doit contenir au moins 12 caractères, dont une lettre majuscule, une lettre minuscule, un chiffre et un caractère spécial.");
         }
 
         // Création du model

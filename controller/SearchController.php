@@ -8,12 +8,10 @@ class SearchController
     {
         // redirection sur home si pas de search
         if (!isset($_GET["search"])) {
-            header("Location: /");
+            header("Location: /toutici/");
         }
 
         $search = $_GET["search"];
-
-        var_dump($search);
 
         $announcementController = new Announcement();
         $announcements = $announcementController->getAllAnnouncements();
